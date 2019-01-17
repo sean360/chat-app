@@ -1,5 +1,6 @@
 //installed moduels
 const express = require('express');
+const socketIO = require('socket.io');
 
 //node modules
 const path = require('path');
@@ -9,9 +10,19 @@ const port = process.env.PORT || 3000;
 console.log(publicPath);
 
 const app = express();
+const server = require('http').Server(app);
+const io = socketIO(server);
 
 app.use(express.static(publicPath));
 
-app.listen(port, () => {
+io.on('connection', (socket) => {
+    console.log('new user connected');
+
+    socket.on('disconnect', () => {
+        console.log('Got disconnect!');
+    });
+});
+
+server.listen(port, () => {
     console.log(`app is running on ${port}`);
-})
+});
