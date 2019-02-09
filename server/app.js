@@ -12,18 +12,24 @@ const app = express();
 const server = require('http').Server(app);
 const io = socketIO(server);
 
+const {generateMessage} = require('./utils/message');
+
 app.use(express.static(publicPath));
 
 io.on('connection', (socket) => {
-    console.log('new user connected');
+
+    socket.emit('userGreeting', generateMessage('Admin', 'Hey there... welcome username'));
+
+    socket.broadcast.emit('userJoined', generateMessage('Admin', 'New user has joined the board'));
     
     socket.on('createMessage', (message) => {
         console.log(message);
-        io.emit('newMessage', {
-            from: message.from,
-            body: message.body,
-            date: new Date().getTime()
-        });
+        io.emit('newMessage', generateMessage(message.from,message.body));
+        // socket.broadcast.emit('newMessage', {
+        //         from: message.from,
+        //         body: message.body,
+        //         date: new Date().getTime()
+        //     });
     });
 
     socket.on('disconnect', () => {
