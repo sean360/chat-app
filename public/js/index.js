@@ -5,20 +5,38 @@ socket.on('connect', () => {
 
     //receive new text message
     socket.on('newMessage', (message) => {
-        let markup = `<li>
-        <p>${message.from}: ${message.body}</p>
-        </li>`;
+        const formatedDate = moment(message.dateCreated);
 
-        document.querySelector('#messages').insertAdjacentHTML('beforeend', markup);
+        const source   = document.getElementById("message-template").innerHTML;
+        const template = Handlebars.compile(source);
+        
+        var context = {
+            from: message.from, 
+            body: message.body,
+            dateCreated: formatedDate.format('h:mm a')
+        };
+        console.log(template(context));
+        const html = template(context);
+
+        document.querySelector('#messages').insertAdjacentHTML('beforeEnd',html);
     });
 
     //receive new location
     socket.on('newLocationMessage', (message) => {
-        let markup = `<li>
-        <p>${message.from}: ${message.body}</p>
-        `;
+        const formatedDate = moment(message.dateCreated);
 
-        document.querySelector('#messages').insertAdjacentHTML('beforeend', markup);
+        const source   = document.getElementById("location-template").innerHTML;
+        const template = Handlebars.compile(source);
+        
+        var context = {
+            from: message.from, 
+            body: message.body,
+            dateCreated: formatedDate.format('h:mm a')
+        };
+        console.log(template(context));
+        const html = template(context);
+
+        document.querySelector('#messages').insertAdjacentHTML('beforeEnd',html);
     });
 
 });
