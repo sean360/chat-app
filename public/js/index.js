@@ -3,14 +3,7 @@ const socket = io();
 socket.on('connect', () => {
     console.log('connected to server');
 
-    socket.on('userJoined', (message) => {
-        console.log(message);
-    });
-
-    socket.on('userGreeting', (greeting) => {
-        console.log(greeting);
-    });
-
+    //receive new text message
     socket.on('newMessage', (message) => {
         let markup = `<li>
         <p>${message.body}</p>
@@ -20,11 +13,13 @@ socket.on('connect', () => {
         document.querySelector('#messages').insertAdjacentHTML('beforeend', markup);
     });
 
-    socket.emit('createMessage', {
-        from: 'Json',
-        body: 'hello there'
-    }, (callback) => {
-        console.log(callback);
+    //receive new location
+    socket.on('newLocationMessage', (message) => {
+        let markup = `<li>
+        <p>${message.from}: ${message.body}</p>
+        `;
+
+        document.querySelector('#messages').insertAdjacentHTML('beforeend', markup);
     });
 
 });
@@ -33,6 +28,7 @@ socket.on('disconnect', () => {
     console.log('Sean Left');
 });
 
+//create message
 document.querySelector("#submit").addEventListener("click", (e) =>  {
 
     e.preventDefault();
@@ -46,6 +42,28 @@ document.querySelector("#submit").addEventListener("click", (e) =>  {
         console.log(callback);
     });
 });
+
+//location
+const locationButton = document.querySelector('#send-location');
+
+const getLocation = () => {
+    if (!navigator.geolocation){
+        return alert('Geolocation is not supported by your browser');
+    } else {
+        navigator.geolocation.getCurrentPosition((position) => {
+            socket.emit('createLocationMessage', {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            });
+        }, () => {
+            return alert('Cannot get your location');
+        });
+    }
+};
+
+locationButton.addEventListener('click', getLocation);
+
+
 
 
 

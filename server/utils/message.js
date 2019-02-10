@@ -6,4 +6,12 @@ const generateMessage = (from, body) => {
     }
 };
 
-module.exports = {generateMessage};
+const generateLocationMessage = (from, lat, lng) => {
+    return {
+        from,
+        body: `<a href="https://google.com/maps?q=${lat},${lng}" target="_blank">Shared Location</a>`,
+        dateCreated: new Date().getTime()
+    }
+};
+
+module.exports = {generateMessage, generateLocationMessage};

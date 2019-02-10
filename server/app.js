@@ -12,24 +12,23 @@ const app = express();
 const server = require('http').Server(app);
 const io = socketIO(server);
 
-const {generateMessage} = require('./utils/message');
+const {generateMessage, generateLocationMessage} = require('./utils/message');
 
 app.use(express.static(publicPath));
 
 io.on('connection', (socket) => {
 
-    socket.emit('userGreeting', generateMessage('Admin', 'Hey there... welcome username'));
+    socket.emit('newMessage', generateMessage('Admin', 'Hey there... welcome username'));
 
-    socket.broadcast.emit('userJoined', generateMessage('Admin', 'New user has joined the board'));
+    socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user has joined the board'));
     
     socket.on('createMessage', (message, callback) => {
         io.emit('newMessage', generateMessage(message.from,message.body));
         callback('This is from the server');
-        // socket.broadcast.emit('newMessage', {
-        //         from: message.from,
-        //         body: message.body,
-        //         date: new Date().getTime()
-        //     });
+    });
+
+    socket.on('createLocationMessage', (coords) => {
+        io.emit('newLocationMessage', generateLocationMessage('Admin', coords.lat, coords.lng));
     });
 
     socket.on('disconnect', () => {
