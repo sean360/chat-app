@@ -10,34 +10,31 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body>
-    <div class="container">
-        <div class="chat__sidebar">
-            <h3>People</h3>
-            <div id="users">
-                <ul class="online__users">
-
-                </ul>
-            </div>
-        </div>
-
-        <div class="chat__main">
-            <ol id="messages" class="chat__messages"></ol>
-
-            <div class="chat__footer">
-                <form id="message-form">
-                    <input name="message" id="messageBody" type="text" placeholder="Type message" autocomplete="off"
-                        autofocus>
-                    <button id="submit">Send</button>
-                </form>
-
-                <button id="send-location">Send Location</button>
-            </div>
-
+<body class="chat">
+    <div class="chat__sidebar">
+        <h3>People</h3>
+        <div id="users">
+            <ul class="online__users">
+            
+            </ul>
         </div>
     </div>
 
-    <script id="message-template" type="text/x-handlebars-template">
+    <div class="chat__main">
+        <ol id="messages" class="chat__messages"></ol>
+
+        <div class="chat__footer">
+            <form id="message-form">
+                <input name="message" id="messageBody" type="text" placeholder="Type message" autocomplete="off" autofocus>
+                <button id="submit">Send</button>
+            </form>
+
+            <button id="send-location">Send Location</button>
+        </div>
+
+    </div>
+
+    <script id="message-template" type="text/x-handlebars-template">  
         <li id="message__li" class="message">
             <div class="message__title">
                 <h4>{{{from}}}</h4>
@@ -49,7 +46,7 @@
         </li>
     </script>
 
-    <script id="location-template" type="text/x-handlebars-template">
+    <script id="location-template" type="text/x-handlebars-template">  
         <li class="message">
             <div class="message__title">
                 <h4>{{{from}}}</h4>
@@ -60,20 +57,13 @@
             </div> 
         </li>
     </script>
-    <footer>
-        <p>For the ❤️ of code</p>
-    </footer>
 
-
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="/js/libs/moment.min.js"></script>
     <script src="/js/libs/handlebars-v4.1.0.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/chat.js"></script>
-
+    
 </body>
 
 </html>

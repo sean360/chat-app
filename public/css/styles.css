@@ -7,17 +7,9 @@
     font-size: .95rem;
   }
 
- 
-   html,body {
-       height: 100%; /* Needed for container's min-height  */  
-   }
-   
-   .container{
-    display: flex;
-       min-height:100%;
-       margin-bottom: -40px; /* Put negative height of the footer here */
-       padding-bottom: 40px; /* Put height of the footer here. Needed for higher than screen height pages */
-   }
+  html,body {
+    min-height: 100%; /* Needed for container's min-height  */  
+}
   
   ul, li {
     list-style-position: inside;
@@ -92,7 +84,7 @@
   }
   
   .chat {
-    
+    display: flex;
   }
   
   .chat__sidebar {
