@@ -8,7 +8,7 @@
   }
 
   html,body {
-    height: 100%; /* Needed for container's min-height  */  
+    min-height: 100%; /* Needed for container's min-height  */  
 }
   
   ul, li {
