@@ -114,8 +114,6 @@ const createMessage = () => {
     const messageTextBox = document.querySelector("#messageBody");
 
     socket.emit('createMessage', {
-        
-
         from: 'User',
         body: messageTextBox.value
     }, (callback) => {
@@ -158,6 +156,17 @@ const getLocation = () => {
 };
 
 locationButton.addEventListener('click', getLocation);
+
+const addFocus = () => {
+    
+    const textBox = document.querySelector('#messageBody');
+
+    textBox.focus();
+}
+
+document.querySelector('#messageBody').addEventListener('click', () => {
+    addFocus();
+})
 
 
 
