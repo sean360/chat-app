@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body class="chat">
-    
+<body>
+    <div class="container">
         <div class="chat__sidebar">
             <h3>People</h3>
             <div id="users">
@@ -35,8 +35,9 @@
             </div>
 
         </div>
+    </div>
 
-        <script id="message-template" type="text/x-handlebars-template">
+    <script id="message-template" type="text/x-handlebars-template">
         <li id="message__li" class="message">
             <div class="message__title">
                 <h4>{{{from}}}</h4>
@@ -48,7 +49,7 @@
         </li>
     </script>
 
-        <script id="location-template" type="text/x-handlebars-template">
+    <script id="location-template" type="text/x-handlebars-template">
         <li class="message">
             <div class="message__title">
                 <h4>{{{from}}}</h4>
@@ -59,8 +60,10 @@
             </div> 
         </li>
     </script>
-        
-   
+    <footer>
+        <p>For the ❤️ of code</p>
+    </footer>
+
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
