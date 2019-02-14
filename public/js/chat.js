@@ -53,16 +53,12 @@ socket.on('disconnect', (user) => {
 
 socket.on('updateUserList', (users) => {
 
-    // Reduce will iterate over all the array items and returns a single value.
   let listItems = users.reduce((result, name) => {
-      
-    // Add a string to the result for the current item. This syntax is using template literals.
-    result += `<li>${name}</li>`;
     
-    // Always return the result in the reduce callback, it will be the value or result in the next iteration.
+result += `<li>${name}</li>`;
+    
     return result;
-  }, ''); // The '' is an empty string, it is the initial value result.
-  // Get the element from the DOM in which to display the list, this should be an ul or ol element.
+  }, ''); 
   resultElement = document.querySelector('.online__users');
 
   resultElement.innerHTML = '';
